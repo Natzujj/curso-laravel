@@ -2,17 +2,14 @@
 
 {{-- @dd($fornecedores) --}}
 
-@if(count($fornecedores) > 0 && count($fornecedores) < 10)
-    <h3>Existem alguns fornecedores cadastrados</h3>
-    @foreach ($fornecedores as $fornecedor)
-        <p>{{$fornecedor}}</p>
-    @endforeach
+Fornecedor: {{ $fornecedores[0]['nome'] }}
+<br>
+Status: {{ $fornecedores[0]['status'] }}
+<br>
+{{-- @if(!($fornecedores[0]['status'] == 'S'))
+    <p>Fornecedor inativo!</p>
+@endif --}}
 
-@elseif(count($fornecedores) > 10)
-    <h3>Existem vários fornecedores cadastrados</h3>
-    @foreach ($fornecedores as $fornecedor)
-        {{$fornecedor}}, 
-    @endforeach
-@else
-    <h3>Não existem fornecedores cadastrados</h3>
-@endif
+@unless($fornecedores[0]['status'] == 'S')
+    <p>Fornecedor inativo!</p>
+@endunless
