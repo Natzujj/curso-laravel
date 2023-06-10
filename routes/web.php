@@ -34,6 +34,10 @@ Route::get('/rota2', function () {
 
 // Route::redirect('/rota2','/rota1'); //Redirect 
 
+Route::fallback(function() {
+    echo 'A rota não foi encontrada. <a href="'.route('site.index').'"> Clique aqui</a> para retornar';
+});
+
 Route::get('/contato/{nome}/{categoria_id}', function(String $nome = 'Não Informado', Int $categoria_id = 1){
     echo "Teste rota contato: $nome /  $categoria_id ";
 })-> where('categoria_id', '[0-9]+')->where('nome', '[A-Za-z]+');
