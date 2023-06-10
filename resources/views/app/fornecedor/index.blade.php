@@ -1,11 +1,18 @@
 <h3>Fornecedor</h3>
 
-{{ 'Texto Teste' }}
+{{-- @dd($fornecedores) --}}
 
-{{-- Comentário no Blade --}}
+@if(count($fornecedores) > 0 && count($fornecedores) < 10)
+    <h3>Existem alguns fornecedores cadastrados</h3>
+    @foreach ($fornecedores as $fornecedor)
+        <p>{{$fornecedor}}</p>
+    @endforeach
 
-@php
-    // Abrir código PHP dentro do blade, utiliza-se o @php e sua tag de finalização
-
-    echo "<br> Texto teste dentro do PHP"
-@endphp
+@elseif(count($fornecedores) > 10)
+    <h3>Existem vários fornecedores cadastrados</h3>
+    @foreach ($fornecedores as $fornecedor)
+        {{$fornecedor}}, 
+    @endforeach
+@else
+    <h3>Não existem fornecedores cadastrados</h3>
+@endif
