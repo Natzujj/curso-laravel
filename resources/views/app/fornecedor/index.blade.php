@@ -1,15 +1,15 @@
 <h3>Fornecedor</h3>
 
-{{-- @dd($fornecedores) --}}
+@php
+    if (isset($variavel)) {} // retorna true se a variavel estiver definida
+@endphp
 
-Fornecedor: {{ $fornecedores[0]['nome'] }}
-<br>
-Status: {{ $fornecedores[0]['status'] }}
-<br>
-{{-- @if(!($fornecedores[0]['status'] == 'S'))
-    <p>Fornecedor inativo!</p>
-@endif --}}
-
-@unless($fornecedores[0]['status'] == 'S')
-    <p>Fornecedor inativo!</p>
-@endunless
+@isset($fornecedores)
+    Fornecedor: {{ $fornecedores[0]['nome'] }}
+    <br>
+    Status: {{ $fornecedores[0]['status'] }}
+    <br>
+    @isset($fornecedores[0]['cnpj'])
+        CNPJ: {{ $fornecedores[0]['cnpj'] }}
+    @endisset
+@endisset
