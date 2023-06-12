@@ -9,10 +9,10 @@
     <br>
     Status: {{ $fornecedores[0]['status'] }}
     <br>
-    @isset($fornecedores[0]['cnpj'])
-        CNPJ: {{ $fornecedores[0]['cnpj'] }}
-        @empty($fornecedores[0]['cnpj'])
-             Vazio
-        @endempty
-    @endisset
+    CNPJ: {{ $fornecedores[0]['cnpj'] ?? 'Não definido'}}
+    <!-- 
+        $variavel testada não estiver definida (isset)
+        ou
+        $variavel testada possuir valor null
+    -->
 @endisset
