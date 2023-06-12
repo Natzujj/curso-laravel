@@ -5,17 +5,17 @@
 @endphp
 
 @isset($fornecedores)
-    @php $i = 0; @endphp
-    @while(isset($fornecedores[$i]))
-        Fornecedor: {{ $fornecedores[$i]['nome'] }}
+
+    @foreach($fornecedores as $fornecedor)
+        Fornecedor: {{ $fornecedor['nome'] }}
         <br>
-        Status: {{ $fornecedores[$i]['status'] }}
+        Status: {{ $fornecedor['status'] }}
         <br>
-        CNPJ: {{ $fornecedores[$i]['cnpj'] ?? 'Não definido'}}
+        CNPJ: {{ $fornecedor['cnpj'] ?? 'Não definido'}}
         <br>
-        Telefone: ({{ $fornecedores[$i]['ddd'] ?? ''}}) {{ $fornecedores[$i]['telefone'] ?? ''}}
+        Telefone: ({{ $fornecedor['ddd'] ?? ''}}) {{ $fornecedor['telefone'] ?? ''}}
         <hr>
-        @php $i++; @endphp
-    @endwhile
+    @endforeach
+
 @endisset
 <br>
