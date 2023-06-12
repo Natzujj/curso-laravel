@@ -6,7 +6,18 @@
 
 @isset($fornecedores)
     @forelse($fornecedores as $fornecedor)
-        Fornecedor: @{{ $fornecedor['nome'] }}
+        {{-- Váriavel loop disponivel apenas em foreachs e forelses --}}
+        {{-- @dd($loop) --}}
+        Iteração atual: {{$loop->iteration}} 
+        <br>
+        @if($loop->first)
+        Primeiro!
+        @endif
+        @if($loop->last)
+        Ultimo! Total de registros = {{$loop->count}}
+        @endif
+        <br>
+        Fornecedor: {{ $fornecedor['nome'] }}
         <br>
         Status: {{ $fornecedor['status'] }}
         <br>
