@@ -10,9 +10,19 @@
     Status: {{ $fornecedores[0]['status'] }}
     <br>
     CNPJ: {{ $fornecedores[0]['cnpj'] ?? 'Não definido'}}
-    <!-- 
-        $variavel testada não estiver definida (isset)
-        ou
-        $variavel testada possuir valor null
-    -->
+    <br>
+    Telefone: ({{ $fornecedores[0]['ddd'] ?? ''}}) {{ $fornecedores[0]['telefone'] ?? ''}}
+    @switch($fornecedores[2]['ddd'])
+        @case('11')
+            São Paulo - SP
+            @break
+        @case('61')
+            Brasilia - DF
+            @break
+        @case('21')
+            Rio de Janeiro - RJ
+            @break
+        @default
+            Estado não identificado
+    @endswitch
 @endisset
