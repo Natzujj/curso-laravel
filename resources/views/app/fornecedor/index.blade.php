@@ -6,7 +6,7 @@
 
 @isset($fornecedores)
     @forelse($fornecedores as $fornecedor)
-        Fornecedor: {{ $fornecedor['nome'] }}
+        Fornecedor: @{{ $fornecedor['nome'] }}
         <br>
         Status: {{ $fornecedor['status'] }}
         <br>
