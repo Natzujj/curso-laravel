@@ -1,3 +1,6 @@
 {
-    "intelephense.diagnostics.undefinedMethods": false
+    "intelephense.diagnostics.undefinedMethods": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": false
 }
