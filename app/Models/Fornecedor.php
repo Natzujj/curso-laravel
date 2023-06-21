@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Fornecedor extends Model
 {
     use HasFactory;
+
     protected $table = 'fornecedores'; //Eloquente Não consegue achar nome da tabela por padrão. Ele tenta achar simplesmente adicionando um "s" no final. Para fazer corretamente com o Eloquente, nomeamos a tabela dessa forma.
+    protected $fillable = ['nome', 'site', 'uf', 'email']; //Eloquente consegue ler os campos dessa forma.
 }
