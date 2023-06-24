@@ -26,10 +26,23 @@ class ContatoController extends Controller
         // $contato->save();
 
         //MÉTODO CREATE() -> Já faz o SAVE() automaticamente
-        if ($_SERVER["REQUEST_METHOD"] == "POST") { // Para que só tente fazer a criação se o método for POST (estava sendo enviado o formulario mesmo no metodo GET)
-            $contato->create($request->all()); //Necessário objeto $fillable no model SiteContatoModel
-        }
+        // if ($_SERVER["REQUEST_METHOD"] == "POST") { // Para que só tente fazer a criação se o método for POST (estava sendo enviado o formulario mesmo no metodo GET)
+        //     $contato->create($request->all()); //Necessário objeto $fillable no model SiteContatoModel
+        // }
 
         return view('site.contato', ['titulo' => 'Contato']);
+    }
+
+    public function salvar(Request $request){
+
+        $request->validate([
+            'nome' => 'required',
+            'telefone' => 'required',
+            'email' => 'required',
+            'motivo_contato' => 'required',
+            'mensagem' => 'required',
+        ]);
+
+        SiteContatoModel::create($request->all()); 
     }
 }
