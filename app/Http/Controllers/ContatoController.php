@@ -3,18 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\SiteContatoModel;
 
 class ContatoController extends Controller
 {
     public function contato(Request $request) //Receber na action o request
     {
-        echo '<pre>';
-        print_r($request->all());
-        echo '</pre>';
-        echo $request->input('nome');
-        echo '<br>';
-        echo $request->input('email');
-        // var_dump($_POST);
+        $contato = new SiteContatoModel();
+
+        // SETANDO ATRIBUTOS INDIVIDUALMENTE
+        // $contato->nome = $request->input('nome');
+        // $contato->telefone = $request->input('telefone');
+        // $contato->email = $request->input('email');
+        // $contato->motivo_contato = $request->input('motivo_contato');
+        // $contato->mensagem = $request->input('mensagem');
+        // print_r($contato->getAttributes()); //verificar o que está sendo armazenado na variavel
+        // $contato->save();
+
+        // METODO FILL()
+        // $contato->fill($request->all()); //Necessário objeto $fillable no model SiteContatoModel
+        // print_r($contato->getAttributes());
+        // $contato->save();
+
+        //MÉTODO CREATE() -> Já faz o SAVE() automaticamente
+        if ($_SERVER["REQUEST_METHOD"] == "POST") { // Para que só tente fazer a criação se o método for POST (estava sendo enviado o formulario mesmo no metodo GET)
+            $contato->create($request->all()); //Necessário objeto $fillable no model SiteContatoModel
+        }
 
         return view('site.contato', ['titulo' => 'Contato']);
     }
