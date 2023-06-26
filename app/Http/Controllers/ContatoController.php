@@ -29,8 +29,13 @@ class ContatoController extends Controller
         // if ($_SERVER["REQUEST_METHOD"] == "POST") { // Para que só tente fazer a criação se o método for POST (estava sendo enviado o formulario mesmo no metodo GET)
         //     $contato->create($request->all()); //Necessário objeto $fillable no model SiteContatoModel
         // }
+            $motivoContatos = [
+                '1' => 'Dúvida',
+                '2' => 'Elogio',
+                '3' => 'Reclamação',
+            ];
 
-        return view('site.contato', ['titulo' => 'Contato']);
+        return view('site.contato', ['titulo' => 'Contato', 'motivoContatos' => $motivoContatos]);
     }
 
     public function salvar(Request $request){
