@@ -9,12 +9,12 @@
     <br>
     <select name='motivo_contato' class="{{$classe}}">
         <option value="">Qual o motivo do contato?</option>
-        @foreach ($motivoContatos as $key => $motivoContato)
-            <option value="{{$key}}" {{ old('motivo_contato') == $key ? 'selected' : '' }}>{{$motivoContato}}</option>
+        @foreach ($motivoContatos as $motivoContato)
+            <option value="{{$motivoContato->id}}" {{ old('motivo_contato') == $motivoContato->id ? 'selected' : '' }}>{{$motivoContato->motivo_contato}}</option>
         @endforeach
     </select>
     <br>
-    <textarea name='mensagem' class="{{$classe}}" placeholder="Preencha aqui a sua mensagem">@if(old('mensagem') !== null){{ old('mensagem') }}@endif</textarea>
+    <textarea name='mensagem' class="{{$classe}}" placeholder="Preencha aqui a sua mensagem">{{ old('mensagem') ? old('mensagem') : '' }}</textarea>
     <br>
     <button type="submit" class="{{$classe}}">ENVIAR</button>
 </form>
