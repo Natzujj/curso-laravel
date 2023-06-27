@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\LogAcesso;
 use Symfony\Component\HttpFoundation\Response;
 
 class LogAcessoMiddleware
@@ -14,7 +15,11 @@ class LogAcessoMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    {
+    {   
+        $ip = $request->server->get('REMOTE_ADDR');
+        $rota = $request->getRequestUri();
+
+        LogAcesso::create(['log' => "IP: $ip requisitou a rota: $rota"]);
         // return $next($request);
         return Response('Chegamos no middleware');
     }
