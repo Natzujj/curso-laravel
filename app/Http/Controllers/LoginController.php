@@ -11,6 +11,19 @@ class LoginController extends Controller
     }
 
     public function autenticar(Request $request){
-        return 'Chegamos até aqui!';
+        
+        $regras = [
+            'usuario' => 'email|required',
+            'senha' => 'required'
+        ];
+
+        $feedback = [
+            'usuario.email' => 'Email inválido',
+            'required' => 'O Campo :attribute não pode ser vazio!' 
+        ];
+
+        $request->validate($regras, $feedback);
+
+        print_r($request->all());
     }
 }
