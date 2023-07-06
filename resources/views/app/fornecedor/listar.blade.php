@@ -42,7 +42,19 @@
                         </tbody>
                     </table>
                     {{-- * Link de Paginação --}}
-                    {{ $fornecedores->appends($request)->links()}} 
+                    {{ $fornecedores->appends($request)->links()}}        
+                    <span> Exibindo {{ $fornecedores->count() }} Fornecedores de {{ $fornecedores->total() }}</span>.
+                    <br>
+                    <span>({{ $fornecedores->firstItem()}} a {{ $fornecedores->lastItem()}})</span> .
+                {{--                     
+                    Métodos Paginator
+                    <br>
+                    {{ $fornecedores->count() }} - Total de registros por pagina
+                    <br>
+                    {{ $fornecedores->total() }} - Total de registros
+                    <br>
+                    {{ $fornecedores->firstItem() }} - Posição do item
+                --}}
             </div>
         </div>
     </div>

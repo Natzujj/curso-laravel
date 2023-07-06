@@ -18,7 +18,7 @@ class FornecedorController extends Controller
         ->where('site', 'like', '%' . $request->input('site') . '%')
         ->where('uf', 'like', '%' . $request->input('uf') . '%')
         ->where('email', 'like', '%' . $request->input('email') . '%')
-        ->paginate(2); // * Paginação no LARAVEL. paginate recebe int (itens por pagina).
+        ->paginate(5); // * Paginação no LARAVEL. paginate recebe int (itens por pagina).
 
         return view('app.fornecedor.listar', ['fornecedores' => $fornecedores, 'request' => $request->all()]);
     }
