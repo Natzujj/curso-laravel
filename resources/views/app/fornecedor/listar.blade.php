@@ -41,6 +41,8 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{-- * Link de Paginação --}}
+                    {{ $fornecedores->appends($request)->links()}} 
             </div>
         </div>
     </div>

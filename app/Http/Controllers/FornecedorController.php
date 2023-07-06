@@ -17,9 +17,10 @@ class FornecedorController extends Controller
         $fornecedores = Fornecedor::where('nome', 'like', '%' . $request->input('nome') . '%')
         ->where('site', 'like', '%' . $request->input('site') . '%')
         ->where('uf', 'like', '%' . $request->input('uf') . '%')
-        ->where('email', 'like', '%' . $request->input('email') . '%')->get();
+        ->where('email', 'like', '%' . $request->input('email') . '%')
+        ->paginate(2); // * Paginação no LARAVEL. paginate recebe int (itens por pagina).
 
-        return view('app.fornecedor.listar', ['fornecedores' => $fornecedores]);
+        return view('app.fornecedor.listar', ['fornecedores' => $fornecedores, 'request' => $request->all()]);
     }
 
     public function adicionar(Request $request){
