@@ -20,7 +20,7 @@
                     @csrf
                     <input type="text" name="nome" class="borda-preta" placeholder="Nome">
                     <input type="text" name="site" class="borda-preta" placeholder="Site">
-                    <input type="text" name="uf" class="borda-preta" placeholder="Fornecedor">
+                    <input type="text" name="uf" class="borda-preta" placeholder="UF">
                     <input type="text" name="email" class="borda-preta" placeholder="E-mail">
                     <button type="submit" class="borda-preta">Pesquisar</button>
                 </form>
