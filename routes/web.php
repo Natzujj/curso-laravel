@@ -45,7 +45,8 @@ Route::prefix('/app')->middleware('autenticacao:padrao,visitante')->group(functi
 
     Route::get('/cliente', [ClienteController::class, 'index'])->name('app.cliente');
 
-    Route::get('/produto', [ProdutoController::class, 'index'])->name('app.produto');
+    // Route::get('/produto', [ProdutoController::class, 'index'])->name('app.produto');
+    Route::resource('/produto', ProdutoController::class);
 });
 
 Route::get('/teste/{p1}/{p2}', [TesteController::class, 'teste'])->name('teste');
