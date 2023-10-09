@@ -20,6 +20,11 @@
       font-size: 22px;
   }
 
+  a:visited {
+    color: blue;
+    text-decoration: none;
+  }
+
   input,
   select,
   textarea,

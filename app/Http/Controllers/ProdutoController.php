@@ -33,7 +33,45 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        echo 'teste store';
+        /**
+         * O paremetro "exists" verifica uma tabela e uma coluna respectivamente
+         */
+        $regras = [
+            'nome' => 'required|min:3|max:40',
+            'descricao' => 'required|min:3|max:2000',
+            'peso' => 'required|integer',
+            'unidade_id' => 'required|exists:unidades,id', 
+        ];
+
+        $feedback = [
+            'required' => 'O campo :attribute é obrigatório',
+            'min' => 'O campo :attribute deve ter no mínimo :min caracteres',
+            'max' => 'O campo :attribute deve ter no máximo :max caracteres',
+            'integer' => 'O campo :attribute deve ser um número inteiro',
+            'exists' => 'O campo :attribute deve ser um valor válido. Não foi encontrado o valor preenchido em nossa tabela',
+        ];
+        $request->validate($regras, $feedback);
+
+        Produto::create($request->all());
+        return redirect()->route('produto.index'); // redireciona para a rota (index)
+
+        /**
+         * Para tratar determinada regra antes de salvar, como adicionar nomes em maiusculo, é recomendado
+         * instanciar o "produto", caso contrario, utilize o método create.
+         */
+
+        // $produto = new Produto();
+
+        // $nome = $request->get('nome');
+        // $descricao = $request->get('descricao');
+
+        // $nome = strtoupper($nome);
+
+        // $produto->nome = $nome;
+        // $produto->descricao = $descricao;
+
+        // $produto->save();
+
     }
 
     /**
@@ -41,7 +79,8 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        echo 'teste show';
+        // dd($produto);
+        return view('app.produto.show', ['produto' => $produto]); // mostra a view (show)
     }
 
     /**
@@ -49,7 +88,8 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        echo 'teste edit';
+        $unidades = Unidade::all();
+        return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades]);
     }
 
     /**
@@ -57,7 +97,8 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        echo 'teste update';
+        $produto->update($request->all());
+        return redirect()->route('produto.show', $produto->id);
     }
 
     /**
@@ -65,6 +106,7 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        echo 'teste destroy';
+        $produto->delete();
+        return redirect()->route('produto.index');
     }
 }
