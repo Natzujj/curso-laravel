@@ -19,7 +19,7 @@
             <br>
             <div>Nome: {{ $produto_detalhe->item->descricao}}</div>
             <br>
-
+            
             {{-- {{ $msg  ?? ''}} --}}
             <div style="width:30%; margin-left: auto; margin-right: auto;"> 
                 @component('app.produto_detalhe._components.form_create_edit', ['produto_detalhe' => $produto_detalhe, 'unidades' => $unidades])
