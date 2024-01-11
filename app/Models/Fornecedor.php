@@ -13,4 +13,9 @@ class Fornecedor extends Model
 
     protected $table = 'fornecedores'; //Eloquente Não consegue achar nome da tabela por padrão. Ele tenta achar simplesmente adicionando um "s" no final. Para fazer corretamente com o Eloquente, nomeamos a tabela dessa forma.
     protected $fillable = ['nome', 'site', 'uf', 'email']; //Eloquente consegue ler os campos dessa forma.
+
+    public function produtos(){
+        return $this->hasMany('App\Models\Item', 'fornecedor_id', 'id');
+        // return $this->hasMany('App\Models\Item'); // Em caso de nomes padrões, pode ser feito assim, sem parametros
+    }
 }
