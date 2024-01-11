@@ -16,4 +16,8 @@ class Item extends Model
         // posso passar parametros personalizados, passando nome da FK e nome da PK no método hasOne
         return $this->hasOne('App\Models\ItemDetalhe', 'produto_id', 'id');
     }
+
+    public function fornecedor(){
+        return $this->belongsTo('App\Models\Fornecedor', 'fornecedor_id', 'id');
+    }
 }
