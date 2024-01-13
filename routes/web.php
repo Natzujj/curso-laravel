@@ -8,6 +8,8 @@ use App\Http\Controllers\TesteController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\PedidoProdutoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProdutoDetalheController;
 use Illuminate\Support\Facades\Route;
@@ -43,13 +45,12 @@ Route::prefix('/app')->middleware('autenticacao:padrao,visitante')->group(functi
     Route::get('/fornecedor/editar/{id}/{msg?}', [FornecedorController::class, 'editar'])->name('app.fornecedor.editar'); //recebemos um id como parametro
     Route::get('/fornecedor/excluir/{id}/{msg?}', [FornecedorController::class, 'excluir'])->name('app.fornecedor.excluir'); //recebemos um id como parametro
 
-    Route::get('/cliente', [ClienteController::class, 'index'])->name('app.cliente');
-
-    // Route::get('/produto', [ProdutoController::class, 'index'])->name('app.produto');
     Route::resource('/produto', ProdutoController::class);
-    
-    //Produto detalhes
     Route::resource('/produto-detalhe', ProdutoDetalheController::class);
+
+    Route::resource('/cliente', ClienteController::class);
+    Route::resource('/pedido', PedidoController::class);
+    Route::resource('/pedido-produto', PedidoProdutoController::class);
 });
 
 Route::get('/teste/{p1}/{p2}', [TesteController::class, 'teste'])->name('teste');
