@@ -19,6 +19,10 @@
             <div style="width:30%; margin-left: auto; margin-right: auto;"> 
                 <table border="1" style="text-align: left">
                     <tr>
+                        <td>Fornecedor: </td>
+                        <td>{{ $produto->fornecedor->nome }} </td>
+                    </tr>
+                    <tr>
                         <td>ID: </td>
                         <td>{{ $produto->id }} </td>
                     </tr>

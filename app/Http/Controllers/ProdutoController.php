@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\Produto;
+use App\Models\Fornecedor;
 use App\Models\ProdutoDetalhe;
 use App\Models\Unidade;
 
@@ -27,7 +28,8 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
-        return view('app.produto.create', ['unidades' => $unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.create', ['unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**
@@ -43,6 +45,7 @@ class ProdutoController extends Controller
             'descricao' => 'required|min:3|max:2000',
             'peso' => 'required|integer',
             'unidade_id' => 'required|exists:unidades,id', 
+            'fornecedor_id' => 'required|exists:fornecedores,id', 
         ];
 
         $feedback = [
@@ -54,7 +57,7 @@ class ProdutoController extends Controller
         ];
         $request->validate($regras, $feedback);
 
-        Produto::create($request->all());
+        Item::create($request->all());
         return redirect()->route('produto.index'); // redireciona para a rota (index)
 
         /**
@@ -79,7 +82,7 @@ class ProdutoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Produto $produto)
+    public function show(Item $produto)
     {
         // dd($produto);
         return view('app.produto.show', ['produto' => $produto]); // mostra a view (show)
@@ -88,18 +91,37 @@ class ProdutoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Produto $produto)
+    public function edit(Item $produto)
     {
         $unidades = Unidade::all();
-        return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
         // return view('app.produto.create', ['produto' => $produto, 'unidades' => $unidades]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Produto $produto)
+    public function update(Request $request, Item $produto)
     {
+        // dd($request->all());
+        $regras = [
+            'nome' => 'required|min:3|max:40',
+            'descricao' => 'required|min:3|max:2000',
+            'peso' => 'required|integer',
+            'unidade_id' => 'required|exists:unidades,id', 
+            'fornecedor_id' => 'required|exists:fornecedores,id', 
+        ];
+
+        $feedback = [
+            'required' => 'O campo :attribute é obrigatório',
+            'min' => 'O campo :attribute deve ter no mínimo :min caracteres',
+            'max' => 'O campo :attribute deve ter no máximo :max caracteres',
+            'integer' => 'O campo :attribute deve ser um número inteiro',
+            'exists' => 'O campo :attribute deve ser um valor válido. Não foi encontrado o valor preenchido em nossa tabela',
+        ];
+        $request->validate($regras, $feedback);
+
         $produto->update($request->all());
         return redirect()->route('produto.show', $produto->id);
     }
@@ -107,7 +129,7 @@ class ProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Produto $produto)
+    public function destroy(Item $produto)
     {
         $produto->delete();
         return redirect()->route('produto.index');
